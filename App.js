@@ -45,12 +45,13 @@ const App = () => {
                 <View style={styles.leftContainer}>
                   <Image
                   // <View style={{ width: vw(100), height: vh(100) }}>
-                    style={{width: vh(20), height: vh(20)}}
+                    // style={{width: vh(20), height: vh(20)}}
+                    style={styles.images}
                     source={{uri: item.thumbnails.w160}}
                   />
                 </View>
                 <View style={ styles.rightContainer }>
-                  <Text>{item.title}</Text>
+                  <Text style={styles.titles}>{item.title}</Text>
                   <Text>{item.description}</Text>
                 </View>
               </TouchableOpacity>
@@ -66,55 +67,44 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     display: 'flex',
-    flex: 1,
     alignItems: 'flex-start',
-    backgroundColor: '#1e7214',
-    // alignItems: 'center',
-    // justifyContent: 'space-evenly,'
+    backgroundColor: 'white',
   },
   luokkaClass: {
     display: 'flex',
     flexWrap: 'nowrap',
     flexDirection: 'row',
-    // height: 50,
-    // width: 50,
-    backgroundColor: 'red',
-    borderColor: 'white',
+    backgroundColor: 'lightgray',
+    margin: 16,
+    borderTopWidth: 13,
+    borderBottomWidth: 13,
+    borderColor: 'lightgray',
     borderStyle: 'solid',
     borderRadius: 10,
   },
-/*  leftContainer: {
-    flex: 1,
-    backgroundColor: 'yellow',
+  leftContainer: {
+    height: vh(40),
+    width: '40%',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: 'lightgray',
   },
   rightContainer: {
-    flex: 1,
-    backgroundColor: 'pink',
-  },*/
+    width: '60%',
+    backgroundColor: 'lightgray',
+    padding: 10,
+  },
+  titles: {
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
+  images: {
+    height: '100%',
+    borderRadius: 5,
+    // height: vh(20),
+    // width: vh(20),
+  }
 
-  /*
-  B: {
-    // flex: 2,
-    // height: 200,
-    backgroundColor: 'darkorange',
-    // overflow: 'hidden',
-  },
-  C: {
-    flex: 3,
-    backgroundColor: 'green'
-  },
-  D: {
-    height: 50,
-  },
-  oikea: {
-    backgroundColor: 'pink',
-    flex: 1,
-  },
-  vasen: {
-    backgroundColor: 'green',
-    flex: 1,
-  },
-   */
 });
 
 export default App;
