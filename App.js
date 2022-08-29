@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, SafeAreaView} from 'react-native';
+import {StyleSheet, SafeAreaView, Platform} from 'react-native';
 
 import List from './components/List';
 
@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'flex-start',
     backgroundColor: 'white',
+    paddingTop: Platform.OS === 'android' ? 30 : 0,
   },
 });
 

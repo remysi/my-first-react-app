@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import {vh} from 'react-native-expo-viewport-units';
 
 const ListItem = (props) => {
+  const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   return (
-    <TouchableOpacity style={styles.luokkaClass}>
+    <TouchableOpacity style={styles.mainContainer}>
       <View style={styles.leftContainer}>
         <Image
           style={styles.images}
-          source={{uri: props.singleMedia.thumbnails.w160}}
+          source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
         />
       </View>
       <View style={styles.rightContainer}>
@@ -20,7 +21,7 @@ const ListItem = (props) => {
 };
 
 const styles = StyleSheet.create({
-  luokkaClass: {
+  mainContainer: {
     display: 'flex',
       flexWrap: 'nowrap',
       flexDirection: 'row',
