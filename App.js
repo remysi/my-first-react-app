@@ -1,5 +1,5 @@
 import {StatusBar} from 'expo-status-bar';
-import {MainProvider} from './context/MainContext';
+import {MainProvider} from './contexts/MainContext';
 import Navigator from './navigators/Navigator';
 
 const App = () => {
