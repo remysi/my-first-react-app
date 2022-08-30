@@ -1,9 +1,17 @@
-import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import {StyleSheet, SafeAreaView, Text, Image} from 'react-native';
+import PropTypes from 'prop-types';
 
-const Single = () => {
+const mediaUrl = 'https://media.mw.metropolia.fi/wbma/uploads/';
+
+const Single = ({route}) => {
+  const {filename, title} = route.params;
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Single</Text>
+      <Text>{title}</Text>
+      <Image
+        source={{uri: mediaUrl + filename}}
+        style={{width: 300, height: 300}}
+      />
     </SafeAreaView>
   );
 };
@@ -17,5 +25,9 @@ const styles = StyleSheet.create({
     paddingTop: 40,
   },
 });
+
+Single.propTypes = {
+  route: PropTypes.object,
+};
 
 export default Single;

@@ -4,8 +4,14 @@ import {vh} from 'react-native-expo-viewport-units';
 
 const ListItem = ({singleMedia, navigation}) => {
   const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
+
   return (
-    <TouchableOpacity style={styles.mainContainer}>
+    <TouchableOpacity
+      style={styles.mainContainer}
+      onPress={() => {
+        navigation.navigate('Single', singleMedia);
+      }}
+    >
       <View style={styles.leftContainer}>
         <Image
           style={styles.images}
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
 
 ListItem.propTypes = {
   singleMedia: PropTypes.object,
+  navigation: PropTypes.object,
 };
 
 export default ListItem;

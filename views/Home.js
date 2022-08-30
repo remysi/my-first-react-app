@@ -1,6 +1,6 @@
 import {Platform, SafeAreaView, StyleSheet} from 'react-native';
-import List from '../components/List';
 import PropTypes from 'prop-types';
+import List from '../components/List';
 
 const Home = (props) => {
   const {navigation} = props;
@@ -22,6 +22,6 @@ const styles = StyleSheet.create({
 
 Home.propTypes = {
   navigation: PropTypes.object,
-}
+};
 
 export default Home;

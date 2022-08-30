@@ -10,13 +10,14 @@ const List = ({navigation}) => {
     <FlatList
       data={mediaArray}
       keyExtractor={(item, index) => index.toString()}
-      renderItem={({item}) => <ListItem singleMedia={item} navigation={{navigation}}/>}
+      renderItem={({item}) => (
+        <ListItem singleMedia={item} navigation={navigation} />
+      )}
     />
   );
 };
 
 ListItem.propTypes = {
-  singleMedia: PropTypes.object,
   navigation: PropTypes.object,
 };
 

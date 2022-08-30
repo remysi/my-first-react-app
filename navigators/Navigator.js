@@ -23,7 +23,7 @@ const StackScreen = () => {
       <Stack.Screen
         name='Tabs'
         component={TabScreen}
-        options={{ headerShown: false }}
+        options={{headerShown: false}}
       />
       <Stack.Screen name='Single' component={Single} />
     </Stack.Navigator>
@@ -33,7 +33,7 @@ const StackScreen = () => {
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <StackScreen/>
+      <StackScreen />
     </NavigationContainer>
   );
 };
