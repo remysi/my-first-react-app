@@ -2,19 +2,19 @@ import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {vh} from 'react-native-expo-viewport-units';
 
-const ListItem = (props) => {
+const ListItem = ({singleMedia, navigation}) => {
   const mediaUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   return (
     <TouchableOpacity style={styles.mainContainer}>
       <View style={styles.leftContainer}>
         <Image
           style={styles.images}
-          source={{uri: mediaUrl + props.singleMedia.thumbnails.w160}}
+          source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
         />
       </View>
       <View style={styles.rightContainer}>
-        <Text style={styles.titles}>{props.singleMedia.title}</Text>
-        <Text>{props.singleMedia.description}</Text>
+        <Text style={styles.titles}>{singleMedia.title}</Text>
+        <Text>{singleMedia.description}</Text>
       </View>
     </TouchableOpacity>
   );
