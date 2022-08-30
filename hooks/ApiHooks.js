@@ -11,7 +11,6 @@ const useMedia = () => {
     try {
       const response = await fetch(apiUrl + 'media?limit=12');
       const json = await response.json();
-      console.log(json);
       const allMediaData = json.map(async (mediaItem) => {
         const response = await fetch(apiUrl + 'media/' + mediaItem.file_id);
         return await response.json();
