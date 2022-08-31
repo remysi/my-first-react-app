@@ -6,7 +6,7 @@ const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
   const loadMedia = async () => {
     try {
-      const json = await doFetch(apiUrl + 'media?limit=7');
+      const json = await doFetch(apiUrl + 'media?limit=5');
       const allMediaData = json.map(async (mediaItem) => {
         return await doFetch(apiUrl + 'media/' + mediaItem.file_id);
       });
@@ -61,7 +61,22 @@ const useUser = () => {
     }
   };
 
-  return {getUserByToken};
+  const postUser = async (userData) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(userData),
+    };
+    try {
+      // tähän osoitteeseen tehdään pyyntö
+      return await doFetch(apiUrl + 'users', options);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+    return {getUserByToken, postUser};
+  };
 };
 
 export {useLogin, useMedia, useUser};
