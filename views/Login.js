@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import {useContext, useEffect} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useLogin, useUser} from '../hooks/ApiHooks';
 
 const Login = ({navigation}) => {
-  const [isLoggedIn, setIsLoggedIn] = useContext(MainContext);
+  const {isLoggedIn, setIsLoggedIn, user, setUser} = useContext(MainContext);
+  const {postLogin} = useLogin();
+  const {getUserByToken} = useUser();
 
   const checkToken = async () => {
     try {
       const userToken = await AsyncStorage.getItem('userToken');
-      console.log('token', userToken);
-      // TODO if the content of userToken is 'abc'), set isLoggedIn to true and navigate to Tabs
-      if (userToken === 'abc') {
+      // await AsyncStorage.setItem('userToken', 'abc');
+      // TODO: call getUserByToken(userToken), if you get successful result, set isLoggedIn to true and navigate to Tabs
+        const userData = await getUserByToken(userToken);
         setIsLoggedIn(true);
-      }
     } catch (error) {
       console.error('Login - checkToken', error);
+      // TODO: notify user about wrong username or password
     }
   };
 
@@ -25,10 +28,16 @@ const Login = ({navigation}) => {
   }, []);
 
   const logIn = async () => {
+    const loginCredentials = {
+      username: 'remysi',
+      password: '12345qwerty'
+    };
     try {
       console.log('Button pressed', isLoggedIn);
+      // logs the user in
+      const userData = await postLogin(loginCredentials);
+      await AsyncStorage.setItem('userToken', userData.token);
       setIsLoggedIn(true);
-      await AsyncStorage.setItem('userToken', 'abc');
     } catch (error) {
       console.error('Login - logIn', error);
     }
