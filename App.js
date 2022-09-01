@@ -1,23 +1,16 @@
 import {StatusBar} from 'expo-status-bar';
-import {StyleSheet, SafeAreaView} from 'react-native';
-
-import List from './components/List';
+import Navigator from './navigators/Navigator';
 
 const App = () => {
   return (
-      <SafeAreaView style={styles.container}>
-        <List />
-        <StatusBar style="auto" />
-      </SafeAreaView>
+
+        // <> </> Tämä on React fragment.
+        // Ilman React fragmenttia tulisi error.
+        <>
+          <Navigator></Navigator>
+          <StatusBar style="auto" />
+        </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    backgroundColor: 'white',
-  },
-});
 
 export default App;
