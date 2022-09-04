@@ -6,13 +6,13 @@ import {MainContext} from '../contexts/MainContext';
 import {useLogin, useUser} from '../hooks/ApiHooks';
 
 const RegisterForm = () => {
-  const {IsLoggedIn, setIsLoggedIn} = useContext(MainContext);
+  const {isLoggedIn, setIsLoggedIn} = useContext(MainContext);
   //const {postLogin} = useLogin();
   const {postUser} = useUser();
   const {
     control,
     handleSubmit,
-    formState: { errors }
+    formState: { errors },
   } = useForm({
     defaultValues: {username: '', email: '', password: '', full_name: ''},
   });
@@ -24,19 +24,14 @@ const RegisterForm = () => {
       const result = await postUser(userData);
       console.log('registration result', result);
       // AUTOLOGIN? {postLogin -> save token -> setLoggedIn to true}
-
-      // console.log('Button pressed', isLoggedIn);
-      // const userData = await postLogin(loginCredentials);
-      // await AsyncStorage.setItem('userToken', userData.token);
-      // setIsLoggedIn(true);
     } catch (error) {
-      console.error('RegisterForm error - register', error);
+      console.error('RegisterForm error', error);
     }
   };
 
   return (
     <View>
-      <Text>Registeration Form</Text>
+      <Text>Registration Form</Text>
 
       <Controller
         control={control}
@@ -63,7 +58,7 @@ const RegisterForm = () => {
         rules={{
           required: true,
         }}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({ field: { onChange, onBlur, value }}) => (
           <TextInput
             onBlur={onBlur}
             onChangeText={onChange}
@@ -82,7 +77,7 @@ const RegisterForm = () => {
           required: true,
           minLength: 3,
         }}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({ field: { onChange, onBlur, value }}) => (
           <TextInput
             onBlur={onBlur}
             onChangeText={onChange}

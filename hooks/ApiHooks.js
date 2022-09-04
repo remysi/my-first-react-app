@@ -75,8 +75,8 @@ const useUser = () => {
     } catch (error) {
       throw new Error(error.message);
     }
-    return {getUserByToken, postUser};
   };
+  return {getUserByToken, postUser};
 };
 
 export {useLogin, useMedia, useUser};
