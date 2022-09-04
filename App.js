@@ -1,15 +1,17 @@
 import {StatusBar} from 'expo-status-bar';
+import {MainProvider} from './contexts/MainContext';
 import Navigator from './navigators/Navigator';
 
 const App = () => {
   return (
-
-        // <> </> Tämä on React fragment.
-        // Ilman React fragmenttia tulisi error.
-        <>
-          <Navigator></Navigator>
-          <StatusBar style="auto" />
-        </>
+    // <> </> Tämä on React fragment.
+    // Ilman React fragmenttia tulisi error.
+    <>
+      <MainProvider>
+        <Navigator></Navigator>
+      </MainProvider>
+      <StatusBar style="auto" />
+    </>
   );
 };
 
