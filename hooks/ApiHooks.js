@@ -79,4 +79,14 @@ const useUser = () => {
   return {getUserByToken, postUser};
 };
 
-export {useLogin, useMedia, useUser};
+const useTag = () => {
+  // tuota getFilesByTag voi aina käyttää kun haluaa etsiä tagin mukaan
+  const getFilesByTag = async (tag) => {
+    // tähän osoitteeseen tehdään pyyntö
+    return await doFetch(apiUrl + 'tags/' + tag)
+  };
+
+  return {getFilesByTag};
+};
+
+export {useLogin, useMedia, useUser, useTag};
