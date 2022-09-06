@@ -1,10 +1,12 @@
-import {View, Text, Button, TextInput} from 'react-native';
+import {View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useContext} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {useLogin} from '../hooks/ApiHooks';
-import * as PropTypes from 'prop-types';
+
+import {Input, Button, Text} from '@rneui/themed';
+
 
 const LoginForm = () => {
   const {setIsLoggedIn, setUser} = useContext(MainContext);
@@ -38,18 +40,21 @@ const LoginForm = () => {
           minLength: 3,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
+          <Input
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             placeholder='Username'
+            autoCapitalize='none'
+            errorMessage={
+              errors.username?.type === 'required' && <Text>This is required.</Text>
+              || errors.username?.type === 'minLength' && <Text>Min 3 chars!</Text>
+            }
           />
         )}
         name="username"
       />
 
-      {errors.username?.type === 'required' && <Text>This is required.</Text>}
-      {errors.username?.type === 'minLength' && <Text>Min 3 chars!</Text>}
 
       <Controller
         control={control}
@@ -58,18 +63,21 @@ const LoginForm = () => {
           minLength: 3,
         }}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
+          <Input
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
             secureTextEntry={true}
             placeholder='Password'
+            errorMessage={
+              errors.password?.type === 'required' && <Text>This is required.</Text>
+              || errors.password?.type === 'minLength' && <Text>Min 3 chars!</Text>
+            }
           />
         )}
         name="password"
       />
-      {errors.password?.type === 'required' && <Text>This is required.</Text>}
-      {errors.password?.type === 'minLength' && <Text>Min 3 chars!</Text>}
+
 
       <Button
         title="Sign in!"

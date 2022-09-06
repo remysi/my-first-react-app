@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import {vh} from 'react-native-expo-viewport-units';
 import {mediaUrl} from '../utils/variables';
 
+// kun jo on olemassa esim ListItem niin voidaan importtaa eri nimella käyttämällä 'as'
+import {ListItem as RNEListItem} from '@rneui/themed';
+
 const ListItem = ({singleMedia, navigation}) => {
 
   return (

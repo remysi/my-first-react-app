@@ -1,17 +1,15 @@
 import {StatusBar} from 'expo-status-bar';
 import {MainProvider} from './contexts/MainContext';
 import Navigator from './navigators/Navigator';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   return (
-    // <> </> Tämä on React fragment.
-    // Ilman React fragmenttia tulisi error.
-    <>
+    <SafeAreaProvider>
       <MainProvider>
         <Navigator></Navigator>
       </MainProvider>
-      <StatusBar style="auto" />
-    </>
+    </SafeAreaProvider>
   );
 };
 

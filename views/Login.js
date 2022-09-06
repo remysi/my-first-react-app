@@ -16,7 +16,6 @@ const Login = ({navigation}) => {
     console.log('token', userToken);
     try {
       // await AsyncStorage.setItem('userToken', 'abc');
-      // TODO: call getUserByToken(userToken), if you get successful result, set isLoggedIn to true and navigate to Tabs
       if (userToken != null) {
         const userData = await getUserByToken(userToken);
         setIsLoggedIn(true);
@@ -33,7 +32,7 @@ const Login = ({navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View>
       <LoginForm></LoginForm>
       <RegisterForm></RegisterForm>
     </View>
