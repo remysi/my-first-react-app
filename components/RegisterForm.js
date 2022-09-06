@@ -5,7 +5,7 @@ import {useContext} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {useLogin, useUser} from '../hooks/ApiHooks';
 
-import {Input, Button, Text} from '@rneui/themed';
+import {Input, Button, Text, Card} from '@rneui/themed';
 
 const RegisterForm = () => {
   const {isLoggedIn, setIsLoggedIn} = useContext(MainContext);
@@ -33,7 +33,7 @@ const RegisterForm = () => {
 
   return (
     <View>
-      <Text>Registration Form</Text>
+      <Card.Title style={{ marginTop: 20 }}>Registration Form</Card.Title>
 
       <Controller
         control={control}

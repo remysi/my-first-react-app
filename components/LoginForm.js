@@ -5,7 +5,7 @@ import {useContext} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {useLogin} from '../hooks/ApiHooks';
 
-import {Input, Button, Text} from '@rneui/themed';
+import {Input, Button, Text, Card} from '@rneui/themed';
 
 
 const LoginForm = () => {
@@ -31,7 +31,7 @@ const LoginForm = () => {
 
   return (
     <View>
-      <Text>Login Form</Text>
+      <Card.Title style={{ marginTop: 20 }}>Login Form</Card.Title>
 
       <Controller
         control={control}
