@@ -36,7 +36,7 @@ const RegisterForm = () => {
           minLength: 3,
           validate: async (value) => {
             const available = await checkUsername(value);
-            return available ? true : 'Username has been taken!';
+            return available ? true : 'Username already taken!';
           },
         }}
         render={({field: {onChange, onBlur, value}}) => (
