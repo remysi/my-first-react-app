@@ -9,9 +9,12 @@ import {Input, Button, Text, Card} from '@rneui/themed';
 
 
 const LoginForm = () => {
-  const {setIsLoggedIn, setUser} = useContext(MainContext);
+  const {isLoggedIn, setIsLoggedIn, setUser} = useContext(MainContext);
   const {postLogin} = useLogin();
-  const {control, handleSubmit, formState: { errors }
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
   } = useForm({
     defaultValues: {username: '', password: ''},
   });
@@ -30,8 +33,8 @@ const LoginForm = () => {
   };
 
   return (
-    <View>
-      <Card.Title style={{ marginTop: 20 }}>Login Form</Card.Title>
+    <Card>
+      <Card.Title style={{ marginTop: 20 }}>Login</Card.Title>
 
       <Controller
         control={control}
@@ -39,7 +42,7 @@ const LoginForm = () => {
           required: true,
           minLength: 3,
         }}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({field: {onChange, onBlur, value}}) => (
           <Input
             onBlur={onBlur}
             onChangeText={onChange}
@@ -47,8 +50,12 @@ const LoginForm = () => {
             placeholder='Username'
             autoCapitalize='none'
             errorMessage={
-              errors.username?.type === 'required' && <Text>This is required.</Text>
-              || errors.username?.type === 'minLength' && <Text>Min 3 chars!</Text>
+              (errors.username?.type === 'required' && (
+                <Text>This is required.</Text>
+              )) ||
+              (errors.username?.type === 'minLength' && (
+                <Text>Min 3 chars!</Text>
+              ))
             }
           />
         )}
@@ -82,7 +89,7 @@ const LoginForm = () => {
       <Button
         title="Sign in!"
         onPress={handleSubmit((data) => logIn(data))} />
-    </View>
+    </Card>
   );
 };
 

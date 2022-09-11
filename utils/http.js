@@ -1,7 +1,7 @@
 const doFetch = async (url, options = {}) => {
   try {
     const response = await fetch(url, options);
-    const data = response.json();
+    const data = await response.json();
     if (response.ok) {
       return data;
     } else {

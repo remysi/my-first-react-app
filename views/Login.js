@@ -13,22 +13,22 @@ const Login = ({navigation}) => {
 
   const checkToken = async () => {
     const userToken = await AsyncStorage.getItem('userToken');
-    console.log('token', userToken);
+    // console.log('token', userToken);
     try {
-      // await AsyncStorage.setItem('userToken', 'abc');
+
       if (userToken != null) {
         const userData = await getUserByToken(userToken);
         setIsLoggedIn(true);
         setUser(userData);
       }
     } catch (error) {
-      // token invalid
+      // token invalid on server side
       console.error('Login - checkToken', error);
     }
   };
 
   useEffect(() => {
-    // checkToken();
+    checkToken();
   }, []);
 
   return (

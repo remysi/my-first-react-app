@@ -5,7 +5,9 @@ import {useContext} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import {useLogin, useUser} from '../hooks/ApiHooks';
 
-import {Input, Button, Text, Card} from '@rneui/themed';
+import {Card} from '@rneui/themed';
+import {Input, Text, Button} from '@rneui/base';
+
 
 const RegisterForm = () => {
   const {isLoggedIn, setIsLoggedIn} = useContext(MainContext);
@@ -25,15 +27,15 @@ const RegisterForm = () => {
     try {
       const result = await postUser(userData);
       console.log('registration result', result);
-      // AUTOLOGIN? {postLogin -> save token -> setLoggedIn to true}
+      // AUTOLOGIN? (postLogin -> save token -> setloggedin to true)
     } catch (error) {
       console.error('RegisterForm error', error);
     }
   };
 
   return (
-    <View>
-      <Card.Title style={{ marginTop: 20 }}>Registration Form</Card.Title>
+    <Card>
+      <Card.Title style={{ marginTop: 20 }}>Register</Card.Title>
 
       <Controller
         control={control}
@@ -47,9 +49,14 @@ const RegisterForm = () => {
             onChangeText={onChange}
             value={value}
             placeholder='Username'
-              errorMessage={
-              errors.username?.type === 'required' && <Text>This is required.</Text> ||
-              errors.username?.type === 'minLength' && <Text>Min 3 chars!</Text>
+            autoCapitalize='none'
+            errorMessage={
+              (errors.username?.type === 'required' && (
+                <Text>This is required.</Text>
+              )) ||
+              (errors.username?.type === 'minLength' && (
+                <Text>Min 3 chars!</Text>
+              ))
             }
           />
         )}
@@ -111,6 +118,7 @@ const RegisterForm = () => {
             onChangeText={onChange}
             value={value}
             placeholder='Full name'
+            autoCapitalize='words'
           />
         )}
         name="full_name"
@@ -119,7 +127,7 @@ const RegisterForm = () => {
       <Button
         title="Register!"
         onPress={handleSubmit(register)} />
-    </View>
+    </Card>
   );
 };
 

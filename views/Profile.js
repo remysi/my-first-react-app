@@ -1,9 +1,11 @@
 import {useContext, useEffect, useState} from 'react';
-import {Text, Image, Button, Card, ListItem, Icon, Avatar} from '@rneui/themed';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useTag} from '../hooks/ApiHooks';
 import {apiUrl, mediaUrl} from '../utils/variables';
+import FullSizeImage from '../components/FullSizeImage';
+import {Avatar, Button, Card, ListItem} from '@rneui/themed';
+
 
 const Profile = () => {
   const {isLoggedIn, setIsLoggedIn, user} = useContext(MainContext);
@@ -20,7 +22,7 @@ const Profile = () => {
       // haetaan taulukosta avatar tiedosto    pop palauttaa taulukon viimeisen alkion
       const avatarFile = avatarArray.pop();
       setAvatar(mediaUrl + avatarFile.filename);
-      console.log('avatar', mediaUrl + avatarFile.filename);
+      console.log('avatarArray', mediaUrl + avatarFile.filename);
     } catch (error) {
       console.error('fetchAvatar', error.message);
     }
@@ -44,19 +46,24 @@ const Profile = () => {
   return (
     <Card>
       <Card.Title>
-        User: {user.username} (id: {user.user_id})
+        {user.full_name}
       </Card.Title>
-      <Card.Image source={{uri: avatar}} />
+      <FullSizeImage source={{uri: avatar}} />
       <ListItem>
         <Avatar
           icon={{name: 'contact-mail', type: 'material'}}
           containerStyle={{backgroundColor: '#aaa'}}
         />
-        <Text>{user.email}</Text>
+        <ListItem.Title>{user.email}</ListItem.Title>
       </ListItem>
       <ListItem>
-        <Icon name='person'/>
-        <Text>Full name: {user.full_name}</Text>
+        <Avatar
+          icon={{name: 'person', type: 'material'}}
+          containerStyle={{backgroundColor: '#aaa'}}
+        />
+        <ListItem.Title>
+          {user.username} (id: {user.user_id})
+        </ListItem.Title>
       </ListItem>
       <Button title="Logout" onPress={logOut} />
     </Card>

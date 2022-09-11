@@ -1,34 +1,40 @@
-import {Image, Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+
 import PropTypes from 'prop-types';
 import {vh} from 'react-native-expo-viewport-units';
 import {mediaUrl} from '../utils/variables';
 
 // kun jo on olemassa esim ListItem niin voidaan importtaa eri nimella käyttämällä 'as'
-import {ListItem as RNEListItem} from '@rneui/themed';
+import {ListItem as RNEListItem, Avatar} from '@rneui/themed';
+
 
 const ListItem = ({singleMedia, navigation}) => {
 
   return (
-    <TouchableOpacity
-      style={styles.mainContainer}
+    <RNEListItem
+      bottomDivider
       onPress={() => {
         navigation.navigate('Single', singleMedia);
       }}
     >
-      <View style={styles.leftContainer}>
-        <Image
-          style={styles.images}
-          source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
-        />
-      </View>
-      <View style={styles.rightContainer}>
-        <Text style={styles.titles}>{singleMedia.title}</Text>
-        <Text>{singleMedia.description}</Text>
-      </View>
-    </TouchableOpacity>
+      <Avatar
+        size='large'
+        source={{uri: mediaUrl + singleMedia.thumbnails.w160}}
+      />
+
+      <RNEListItem.Content>
+        <RNEListItem.Title numberOfLines={1} h4>
+          {singleMedia.title}
+        </RNEListItem.Title>
+        <RNEListItem.Subtitle numberOfLines={1}>
+          {singleMedia.description}
+        </RNEListItem.Subtitle>
+      </RNEListItem.Content>
+      <RNEListItem.Chevron />
+    </RNEListItem>
   );
 };
 
+/*
 const styles = StyleSheet.create({
   mainContainer: {
     display: 'flex',
@@ -65,6 +71,10 @@ const styles = StyleSheet.create({
     // width: vh(20),
   },
 });
+ */
+
+
+
 
 ListItem.propTypes = {
   singleMedia: PropTypes.object,

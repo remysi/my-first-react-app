@@ -1,45 +1,27 @@
-import {FlatList, StyleSheet} from "react-native";
-import React from "react";
+import {FlatList} from 'react-native';
+import {useMedia} from '../hooks/ApiHooks';
 import ListItem from './ListItem';
-import {useMedia} from "../hooks/ApiHooks";
 
-const List = (props) => {
+import PropTypes from 'prop-types';
+
+const List = ({navigation}) => {
   const {mediaArray} = useMedia();
+
   return (
-    <FlatList style={styles.flatListStyle}
-              data={mediaArray}
-              renderItem={
-                ({item}) => <ListItem
-                  navigation={props.navigation} // without destucturing
-                  singleMedia={item}
-                />
-              }
+    <FlatList
+      data={mediaArray}
+      keyExtractor={(item, index) => index.toString()}
+      renderItem={({item}) => (
+        <ListItem singleMedia={item} navigation={navigation} />
+      )}
     />
   );
 };
 
-/*
-const List = (props) => {
-  const {mediaArray} = useMedia();
-  return (
-    <FlatList style={styles.flatListStyle}
-              data={mediaArray}
-              renderItem={
-                ({item}) => <ListItem
-                  navigation={props.navigation} // without destucturing
-                  singleMedia={item}
-                />
-              }
-    />
-  );
+List.propTypes = {
+  navigation: PropTypes.object,
 };
-*/
 
-const styles = StyleSheet.create({
-  flatListStyle: {
-    backgroundColor: '#ffffff',
-    width: '100%',
-  },
-});
+
 
 export default List;

@@ -7,7 +7,7 @@ import Single from "../views/Single";
 import {MainContext} from '../contexts/MainContext';
 import Login from '../views/Login';
 import {useContext} from "react";
-import {Icon} from '@rneui/base';
+import {Icon} from '@rneui/themed';
 
 
 const Tab = createBottomTabNavigator();
@@ -29,7 +29,7 @@ const TabScreen = () => {
         component={Profile}
         options={{
           tabBarIcon: ({color}) =>
-            <Icon name='home' color={color}/>,
+            <Icon name='person' color={color} />,
         }}
       />
     </Tab.Navigator>
@@ -47,10 +47,19 @@ const StackScreen = () => {
             component={TabScreen}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="Single" component={Single} />
+          <Stack.Screen
+            name="Single"
+            component={Single}
+          />
         </>
       ) : (
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            title: 'MyApp',
+          }}
+        />
       )}
     </Stack.Navigator>
   );
@@ -59,7 +68,7 @@ const StackScreen = () => {
 const Navigator = () => {
   return (
     <NavigationContainer>
-      <StackScreen/>
+      <StackScreen />
     </NavigationContainer>
   );
 };

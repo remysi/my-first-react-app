@@ -6,7 +6,7 @@ const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
   const loadMedia = async () => {
     try {
-      const json = await doFetch(apiUrl + 'media?limit=5');
+      const json = await doFetch(apiUrl + 'media?limit=12');
       const allMediaData = json.map(async (mediaItem) => {
         return await doFetch(apiUrl + 'media/' + mediaItem.file_id);
       });
@@ -83,7 +83,7 @@ const useTag = () => {
   // tuota getFilesByTag voi aina käyttää kun haluaa etsiä tagin mukaan
   const getFilesByTag = async (tag) => {
     // tähän osoitteeseen tehdään pyyntö
-    return await doFetch(apiUrl + 'tags/' + tag)
+    return await doFetch(apiUrl + 'tags/' + tag);
   };
 
   return {getFilesByTag};

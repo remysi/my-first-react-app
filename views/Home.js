@@ -5,17 +5,16 @@ import List from '../components/List';
 const Home = (props) => {
   const {navigation} = props;
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.droidSafeArea}>
       <List navigation={navigation} />
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    display: 'flex',
-    alignItems: 'flex-start',
-    backgroundColor: 'white',
+  droidSafeArea: {
+    flex: 1,
+    backgroundColor: '#fff',
     paddingTop: Platform.OS === 'android' ? 30 : 0,
   },
 });
