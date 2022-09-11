@@ -2,9 +2,10 @@ import {useContext, useEffect, useState} from 'react';
 import {MainContext} from '../contexts/MainContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useTag} from '../hooks/ApiHooks';
-import {apiUrl, mediaUrl} from '../utils/variables';
+import {mediaUrl} from '../utils/variables';
 import FullSizeImage from '../components/FullSizeImage';
 import {Avatar, Button, Card, ListItem} from '@rneui/themed';
+import {ScrollView} from 'react-native';
 
 
 const Profile = () => {
@@ -44,29 +45,31 @@ const Profile = () => {
   };
 
   return (
-    <Card>
-      <Card.Title>
-        {user.full_name}
-      </Card.Title>
-      <FullSizeImage source={{uri: avatar}} />
-      <ListItem>
-        <Avatar
-          icon={{name: 'contact-mail', type: 'material'}}
-          containerStyle={{backgroundColor: '#aaa'}}
-        />
-        <ListItem.Title>{user.email}</ListItem.Title>
-      </ListItem>
-      <ListItem>
-        <Avatar
-          icon={{name: 'person', type: 'material'}}
-          containerStyle={{backgroundColor: '#aaa'}}
-        />
-        <ListItem.Title>
-          {user.username} (id: {user.user_id})
-        </ListItem.Title>
-      </ListItem>
-      <Button title="Logout" onPress={logOut} />
-    </Card>
+    <ScrollView>
+      <Card>
+        <Card.Title>
+          {user.full_name}
+        </Card.Title>
+        <FullSizeImage source={{uri: avatar}} />
+        <ListItem>
+          <Avatar
+            icon={{name: 'contact-mail', type: 'material'}}
+            containerStyle={{backgroundColor: '#aaa'}}
+          />
+          <ListItem.Title>{user.email}</ListItem.Title>
+        </ListItem>
+        <ListItem>
+          <Avatar
+            icon={{name: 'person', type: 'material'}}
+            containerStyle={{backgroundColor: '#aaa'}}
+          />
+          <ListItem.Title>
+            {user.username} (id: {user.user_id})
+          </ListItem.Title>
+        </ListItem>
+        <Button title="Logout" onPress={logOut} />
+      </Card>
+    </ScrollView>
   );
 };
 

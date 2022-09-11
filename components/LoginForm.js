@@ -1,4 +1,3 @@
-import {View} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useContext} from 'react';
