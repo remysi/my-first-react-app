@@ -8,6 +8,7 @@ import {MainContext} from '../contexts/MainContext';
 import Login from '../views/Login';
 import {useContext} from "react";
 import {Icon} from '@rneui/themed';
+import Upload from '../views/Upload';
 
 
 const Tab = createBottomTabNavigator();
@@ -30,6 +31,14 @@ const TabScreen = () => {
         options={{
           tabBarIcon: ({color}) =>
             <Icon name='person' color={color} />,
+        }}
+      />
+      <Tab.Screen
+        name="Upload"
+        component={Upload}
+        options={{
+          tabBarIcon: ({color}) =>
+            <Icon name='upload' color={color} />,
         }}
       />
     </Tab.Navigator>
