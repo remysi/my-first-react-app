@@ -1,12 +1,15 @@
 import {useEffect, useState} from 'react';
 import {doFetch} from '../utils/http';
-import {apiUrl} from '../utils/variables';
+import {apiUrl, applicationTag} from '../utils/variables';
 
-const useMedia = () => {
+const useMedia = (update) => {
   const [mediaArray, setMediaArray] = useState([]);
+  // TODO: Vika osa task B upload tehtävä
+  //  Modify loadMedia() in ApiHooks.js
+  //  to show only the files which have the identifier tag of your app.
   const loadMedia = async () => {
     try {
-      const json = await doFetch(apiUrl + 'media?limit=12');
+      const json = await doFetch(apiUrl + 'tags/' + applicationTag);
       const allMediaData = json.map(async (mediaItem) => {
         return await doFetch(apiUrl + 'media/' + mediaItem.file_id);
       });
@@ -20,7 +23,7 @@ const useMedia = () => {
   // remember to use
   useEffect(() => {
     loadMedia();
-  }, []);
+  }, [update]);
 
   const postMedia = async (token, data) => {
     const options = {
@@ -111,7 +114,25 @@ const useTag = () => {
     return await doFetch(apiUrl + 'tags/' + tag);
   };
 
-  return {getFilesByTag};
+  const postTag = async (token, tag) => {
+    const options = {
+      method: 'POST',
+      headers: {
+        'x-access-token': token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(tag),
+    };
+    try {
+      // tähän osoitteeseen tehdään pyyntö
+      return await doFetch(apiUrl + 'tags', options);
+    } catch (error) {
+      throw new Error(error.message);
+    }
+  };
+
+
+  return {getFilesByTag, postTag};
 };
 
 export {useLogin, useMedia, useUser, useTag};
