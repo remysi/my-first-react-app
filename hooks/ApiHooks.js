@@ -22,7 +22,6 @@ const useMedia = () => {
     loadMedia();
   }, []);
 
-
   const postMedia = async (token, data) => {
     const options = {
       method: 'POST',

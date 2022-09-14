@@ -3,8 +3,10 @@ import {Button, Card, Input, Text} from '@rneui/themed';
 import {Controller, useForm} from 'react-hook-form';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useMedia} from '../hooks/ApiHooks';
 
 const Upload = () => {
+  const {postMedia} = useMedia;
   const [image, setImage] = useState(null);
 
   const {
@@ -32,15 +34,21 @@ const Upload = () => {
   };
 
   const onSubmit = async (data) => {
-    const formData = new FormData();
-    formData.append('title', data.title);
-    formData.append('description', data.description);
-    formData.append('file', {
-      uri: image.uri,
-      name: 'testi.jpg',
-      type: 'image/jpeg',
-    });
-    const token = await AsyncStorage.getItem('userToken');
+    try {
+      const formData = new FormData();
+
+      formData.append('title', data.title);
+      formData.append('description', data.description);
+      formData.append('file', {
+        uri: image.uri,
+        name: 'testi.jpg',
+        type: 'image/jpeg',
+      });
+      const token = await AsyncStorage.getItem('userToken');
+      const post = await postMedia(token, formData);
+    } catch (e) {
+      console.log('Error with submitting', e);
+    }
   };
 
   return (
@@ -92,6 +100,5 @@ const Upload = () => {
     </Card>
   );
 };
-// laita ylemmän napin viereen
 
 export default Upload;
