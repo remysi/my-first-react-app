@@ -38,7 +38,7 @@ const TabScreen = () => {
         component={Upload}
         options={{
           tabBarIcon: ({color}) =>
-            <Icon name='upload' color={color} />,
+            <Icon name='cloud-upload' color={color} />,
         }}
       />
     </Tab.Navigator>

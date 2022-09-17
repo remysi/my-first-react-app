@@ -4,9 +4,6 @@ import {apiUrl, applicationTag} from '../utils/variables';
 
 const useMedia = (update) => {
   const [mediaArray, setMediaArray] = useState([]);
-  // TODO: Vika osa task B upload tehtävä
-  //  Modify loadMedia() in ApiHooks.js
-  //  to show only the files which have the identifier tag of your app.
   const loadMedia = async () => {
     try {
       const json = await doFetch(apiUrl + 'tags/' + applicationTag);
