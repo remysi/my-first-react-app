@@ -5,7 +5,10 @@ const MainContext = React.createContext({});
 
 const MainProvider = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // userissa on koko user objekti
   const [user, setUser] = useState({});
+
   const [update, setUpdate] = useState(true);
 
   return (

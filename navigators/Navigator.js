@@ -9,6 +9,8 @@ import Login from '../views/Login';
 import {useContext} from "react";
 import {Icon} from '@rneui/themed';
 import Upload from '../views/Upload';
+import MyFiles from '../views/MyFiles';
+import ModifyFile from '../views/ModifyFile';
 
 
 const Tab = createBottomTabNavigator();
@@ -59,6 +61,14 @@ const StackScreen = () => {
           <Stack.Screen
             name="Single"
             component={Single}
+          />
+          <Stack.Screen
+            name="MyFiles"
+            component={MyFiles}
+          />
+          <Stack.Screen
+            name="ModifyFile"
+            component={ModifyFile}
           />
         </>
       ) : (
