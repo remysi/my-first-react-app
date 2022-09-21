@@ -64,7 +64,7 @@ const ListItem = ({singleMedia, navigation, myFilesOnly}) => {
           {singleMedia.description}
         </RNEListItem.Subtitle>
 
-        {/* vain, jos myFilesOnly on true, niin modify ja delete napit näytetään*/}
+        {/* vain, jos myFilesOnly on true, niin modify ja delete napit näytetään */}
         {/* myFilesOnly && ( */}
 
         {/* Tämä ehtolause tekee sen, että vain current userin postauksissa etusivulla näkyy napit */}
