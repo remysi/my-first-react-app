@@ -6,7 +6,8 @@ import FullSizeImage from '../components/FullSizeImage';
 import {Video} from 'expo-av';
 import {useEffect, useState} from 'react';
 import * as ScreenOrientation from 'expo-screen-orientation';
-import {useTag} from '../hooks/ApiHooks';
+import {useTag, useUser} from '../hooks/ApiHooks';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 // contains the posted image, user id and profile picture of the poster.
@@ -15,6 +16,8 @@ const Single = ({route}) => {
   const [videoRef, setVideoRef] = useState(null);
   const [avatar, setAvatar] = useState('https://placekitten.com/160');
   const {getFilesByTag} = useTag();
+  const [username, setUserName] = useState(null);
+  const {getUserById} = useUser();
 
   const fetchAvatar = async () => {
     try {
@@ -29,19 +32,15 @@ const Single = ({route}) => {
     }
   };
 
-  /*
-  const fetchUsername = async () => {
+  const fetchUserName = async () => {
     try {
-      const avatarArray = await getUserById(userdata.username);
-      // haetaan taulukosta avatar tiedosto pop palauttaa taulukon viimeisen alkion
-      const avatarFile = avatarArray.pop();
-      setAvatar(mediaUrl + avatarFile.filename);
-      console.log('avatarArray', mediaUrl + avatarFile.filename);
+      const token = await AsyncStorage.getItem('userToken');
+      const usernameArray = await getUserById(token, user_id);
+      setUserName(usernameArray.username);
     } catch (error) {
       console.error('fetchAvatar', error.message);
     }
   };
-   */
 
   const handleVideoRef = (component) => {
     setVideoRef(component);
@@ -76,6 +75,7 @@ const Single = ({route}) => {
   // Listens for screen orientation change
   useEffect(() => {
     fetchAvatar();
+    fetchUserName();
     unlock();
     const orientSub = ScreenOrientation.addOrientationChangeListener((evt) => {
       // different screen orientations have different values logged down below
@@ -124,7 +124,7 @@ const Single = ({route}) => {
         <ListItem>
           <Avatar
             source={{uri: avatar}} />
-            <Text>{user_id}</Text>
+            <Text>{username}</Text>
         </ListItem>
       </Card>
     </ScrollView>

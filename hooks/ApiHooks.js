@@ -145,24 +145,21 @@ const useUser = () => {
     }
   };
 
-/*
-  const getUserById = (token) => {
+  const getUserById = (token, user_id) => {
     try {
         const options = {
         method: 'GET',
         headers: {'x-access-token': token},
       };
-        // oli await enne doFetch
-      const userData = doFetch(apiUrl + 'users/user', options);
+      const userData = doFetch(apiUrl + 'users/' + user_id, options);
       return userData;
     } catch (error) {
       throw new Error(error.message);
     }
   };
-  */
 
   // return getUserById
-  return {checkUsername, getUserByToken, postUser};
+  return {checkUsername, getUserByToken, postUser, getUserById};
 };
 
 const useTag = () => {
